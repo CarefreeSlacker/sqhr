@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: username
+  password: password
+
+development:
+  <<: *default
+  database: sqhr_development
+
+test:
+  <<: *default
+  database: sqhr_test
+
+production:
+  <<: *default
+  database: sqhr_production
+  username: sqhr
+  password: <%= ENV['SQHR_DATABASE_PASSWORD'] %>
