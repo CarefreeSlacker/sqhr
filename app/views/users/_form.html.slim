@@ -8,9 +8,9 @@
 
   = f.input :first_name
   = f.input :last_name
-  = f.input :department, as: :select, collection: Department.all, label_method: :name, value_method: :id
-  = f.input :position, as: :select, collection: Position.all, label_method: :name, value_method: :id
-  = f.input :salary
-  = f.input :hr_manager, as: :boolean
+  - unless @user.persisted
+    = f.input :department, as: :select, collection: Department.all, label_method: :name, value_method: :id
+    = f.input :position, as: :select, collection: Position.all, label_method: :name, value_method: :id
+    = f.input :salary
   hr
   = f.submit

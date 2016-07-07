@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.xdescribe "users/new", type: :view do
+xdescribe "users/new", type: :view do
   before(:each) do
     assign(:user, User.new(
       :first_name => "MyString",

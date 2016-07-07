@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.xdescribe "users/index", type: :view do
+xdescribe "users/index", type: :view do
   before(:each) do
     assign(:users, [
       User.create!(

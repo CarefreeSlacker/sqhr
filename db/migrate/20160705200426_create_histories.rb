@@ -5,7 +5,7 @@ class CreateHistories < ActiveRecord::Migration
       t.belongs_to :user, index: true, foreign_key: true
       t.string :old_value
       t.string :new_value
-      t.string :attribute
+      t.string :attribute_name
       t.date :date
 
       t.timestamps null: false

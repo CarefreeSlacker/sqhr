@@ -29,10 +29,10 @@ ActiveRecord::Schema.define(version: 20160705200426) do
     t.integer  "user_id"
     t.string   "old_value"
     t.string   "new_value"
-    t.string   "attribute"
+    t.string   "attribute_name"
     t.date     "date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   add_index "histories", ["user_id"], name: "index_histories_on_user_id", using: :btree

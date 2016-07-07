@@ -1,8 +1,7 @@
 h1 Editing user
 
-== render 'form'
-
-= link_to 'Show', @user
-'|
+- if params[:edit_type]
+  - User::EDIT_ACTIONS.each do |action|
+    = render partial: "edit_forms/#{action}"
 = link_to 'Back', users_path
 
