@@ -1,0 +1,27 @@
+h1 Listing histories
+
+table.table.table-stripped
+  thead
+    tr
+      th User ID
+      th Type
+      th Attribute name
+      th Old value
+      th New value string
+      th Date
+      th
+      th
+
+  tbody
+    - @histories.each do |history|
+      tr
+        td = history.user_id
+        td = history.type_name
+        td = history.attribute_name
+        td = history.old_value
+        td = history.new_value
+        td = I18n.l(history.date, format: '%d.%m.%Y')
+        td = link_to 'Show', history_path(history)
+        td = link_to 'Destroy', history_path(history), data: { confirm: 'Are you sure?' }, method: :delete
+
+br

@@ -1,0 +1,22 @@
+p#notice = notice
+
+p
+  strong User:
+  = @history.user_id
+p
+  strong Type:
+  = @history.type
+p
+  strong Attribute name:
+  = @history.attribute_name
+p
+  strong Old value:
+  = @history.old_value
+p
+  strong New value string:
+  = @history.new_value
+p
+  strong Date:
+  = @history.date
+
+= link_to 'Back', histories_path

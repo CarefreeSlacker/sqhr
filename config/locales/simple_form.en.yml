@@ -15,6 +15,13 @@ en:
       edit_name: 'Поменять инициалы'
       fire: 'Уволить'
       transfer: 'Перевести в другой отдел'
+  histories:
+    active_record:
+      type:
+        fire: 'Увольнение'
+        hire: 'Принят на работу'
+        edit_name: 'Изменен атрибут'
+        transfer: 'Перевод'
     # Examples
     # labels:
     #   defaults:

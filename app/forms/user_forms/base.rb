@@ -17,6 +17,7 @@ class UserForms::Base
   def initialize(user)
     @user = user
     @today = Date.today
+    @histories = []
   end
 
   def submit(params)
@@ -51,16 +52,11 @@ class UserForms::Base
   end
 
   def initialize_histories(params)
-    @histories = []
     params.each do |attribute, new_value|
       old_value = user.send(attribute)
 
       next if new_value == old_value
-      @histories << history_class.new(user_id: user.id,
-                                      old_value: old_value,
-                                      new_value: new_value,
-                                      attribute_name: attribute,
-                                      date: today)
+      @histories << new_history(attribute, old_value, new_value)
       send "#{attribute}=", new_value
     end
   end
@@ -77,5 +73,13 @@ class UserForms::Base
     if user.fired?
       self.errors.add(:base, 'Нельзя производить действия на дуволенными сотрудниками')
     end
+  end
+
+  def new_history(attribute_name, old_value, new_value)
+    history_class.new(user_id: user.id,
+                      old_value: old_value,
+                      new_value: new_value,
+                      attribute_name: attribute_name,
+                      date: today)
   end
 end
