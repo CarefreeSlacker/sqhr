@@ -1,0 +1,4 @@
+= f.input :department_id, as: :select, collection: Department.all, lavel_method: :name, value_method: :id
+= f.input :position_id, as: :select, collection: Position.all, lavel_method: :name, value_method: :id
+= f.input :salary
+= f.submit 'Перевести'

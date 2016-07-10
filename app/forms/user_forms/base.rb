@@ -4,6 +4,8 @@ class UserForms::Base
 
   attr_reader :user, :histories, :today
 
+  validate :user_can_not_be_fired
+
   def self.model_attributes(*attributes_list)
     @@attributes_list = attributes_list
     attributes_list.map!{|attribute| [attribute, "#{attribute}=".to_sym] }.flatten!
@@ -20,12 +22,16 @@ class UserForms::Base
   def submit(params)
     initialize_histories(params.slice(*permitted_attributes))
     if valid?
-      create_histories
       user.save
+      create_histories
       true
     else
       false
     end
+  end
+
+  def to_model
+    user
   end
 
   def history_class
@@ -46,13 +52,16 @@ class UserForms::Base
 
   def initialize_histories(params)
     @histories = []
-    params.each do |attribute, value|
+    params.each do |attribute, new_value|
+      old_value = user.send(attribute)
+
+      next if new_value == old_value
       @histories << history_class.new(user_id: user.id,
-                                      old_value: user.send(attribute),
-                                      new_value: value,
+                                      old_value: old_value,
+                                      new_value: new_value,
                                       attribute_name: attribute,
                                       date: today)
-      send "#{attribute}=", value
+      send "#{attribute}=", new_value
     end
   end
 
@@ -61,6 +70,12 @@ class UserForms::Base
       user.errors.each do |attribute, message|
         self.errors.add(attribute, message)
       end
+    end
+  end
+
+  def user_can_not_be_fired
+    if user.fired?
+      self.errors.add(:base, 'Нельзя производить действия на дуволенными сотрудниками')
     end
   end
 end

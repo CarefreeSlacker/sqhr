@@ -10,6 +10,11 @@ en:
       # html: '<abbr title="required">*</abbr>'
     error_notification:
       default_message: "Please review the problems below:"
+  users:
+    actions:
+      edit_name: 'Поменять инициалы'
+      fire: 'Уволить'
+      transfer: 'Перевести в другой отдел'
     # Examples
     # labels:
     #   defaults:

@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  EDIT_ACTIONS = %w(transfer edit_names fire)
+  EDIT_ACTIONS = %w(transfer edit_name fire)
 
   belongs_to :department
   belongs_to :position
@@ -11,10 +11,16 @@ class User < ActiveRecord::Base
   validates :position, presence: true
 
   after_create :create_fire_history
+  after_initialize :set_defaults
 
   private
 
   def create_fire_history
     Histories::Hire.create(user_id: self.id, date: Date.today)
+  end
+
+  def set_defaults
+    self.fired ||= false
+    self.hr_manager ||= false
   end
 end

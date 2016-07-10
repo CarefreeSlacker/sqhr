@@ -1,7 +1,13 @@
 h1 Editing user
 
-- if params[:edit_type]
-  - User::EDIT_ACTIONS.each do |action|
-    = render partial: "edit_forms/#{action}"
+- if @action_name
+  = render partial: 'show'
+  hr
+  / - raise 'error'
+  = simple_form_for @user_form do |f|
+    = f.input :action_name, as: :hidden, input_html: { value: @action_name }
+    = render partial: "users/edit_forms/#{@action_name}", locals: { f: f }
+- else
+  = render partial: 'users/edit_forms/choose_action_name'
 = link_to 'Back', users_path
 

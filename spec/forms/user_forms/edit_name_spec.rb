@@ -22,6 +22,11 @@ describe UserForms::EditName do
     it 'does not fails if wrong parameter given' do
       expect{subject.submit(unexisting_prameter: 'Fight rebel and riot')}.not_to raise_error
     end
+
+    it 'invalid if user fired' do
+      user.update_attribute 'fired', true
+      expect(subject.submit(first_name: 'NewValue')).to eq(false)
+    end
   end
 
   describe 'history creation' do

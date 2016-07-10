@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :user do
-    first_name "MyString"
-    last_name "MyString"
+    first_name "FirstName"
+    last_name "LastName"
     association :department, factory: :department
     association :position, factory: :position
     fired false

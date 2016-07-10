@@ -1,0 +1,6 @@
+h3
+  | Выберите действие.
+ul
+  - User::EDIT_ACTIONS.each do |action_name|
+    li
+      = link_to t("users.actions.#{action_name}"), edit_user_path(action_name: action_name)
